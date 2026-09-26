@@ -219,7 +219,7 @@ iframe[title="Codepen"] {
   --text-decoration-color: var(--purple);
 
   width: 30rem;
-  max-width: calc(100vw - 1.5rem);
+  max-width: 100%;
   margin-inline: auto;
   text-decoration-color: var(--text-decoration-color);
 }
@@ -883,10 +883,20 @@ svg.external-indicator {
 [data-component="komoot-card"] {
   margin: 0.75em 0;
 
-  & > a,
   & > a > img,
   & > iframe,
   & > img {
     border-radius: calc(0.75em / 2);
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 540 / 700;
+    object-fit: contain;
+  }
+
+  & > footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.325em;
   }
 }
