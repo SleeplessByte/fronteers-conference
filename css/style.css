@@ -149,7 +149,8 @@ a[href^="mailto:"] {
 
 a:link,
 a:visited,
-a:active {
+a:active,
+button.button {
   text-decoration: underline;
 }
 
@@ -158,11 +159,14 @@ a:visited {
 }
 
 a:focus,
-a:hover {
+a:hover,
+button.button:focus,
+button.button:hover {
   --text-decoration-color: var(--yellow);
 }
 
-a:active {
+a:active,
+button.button:active {
   --text-decoration-color: var(--red);
 }
 
@@ -648,7 +652,8 @@ iframe[title="Codepen"] {
 }
 
 .button {
-  display: inline-block;
+  appearance: none;
+  border: 0;
   min-width: 150px;
   padding: 0.25rem 1.25rem;
   background-color: #000;
@@ -657,6 +662,10 @@ iframe[title="Codepen"] {
   text-decoration: none;
   cursor: pointer;
   clip-path: url(#button-parentheses);
+
+  &:not([hidden]) {
+    display: inline-block;
+  }
 }
 
 .button:focus,
@@ -842,4 +851,41 @@ td br::before {
   bottom: 0;
   object-position: bottom;
   object-fit: cover;
+}
+
+.note-block {
+  padding: 0.75em;
+  margin-top: 0.75em;
+  font-size: smaller;
+  background: rgba(0, 0, 0, 0.54);
+  border-radius: calc(0.75em / 2);
+
+  & > strong:first-child {
+    display: block;
+    margin-bottom: calc(0.75em / 2);
+  }
+}
+
+.note-footnote-block {
+  padding: 0.75em 0;
+  border-top: 3px double rgba(255, 255, 255, 0.52);
+  font-size: smaller;
+  margin: 0.75em 0;
+}
+
+svg.external-indicator {
+  width: 18px;
+  height: 18px;
+  margin: -4px 0;
+  color: var(--text-decoration-color, yellow);
+}
+
+[data-component="komoot-card"] {
+  margin: 0.75em 0;
+
+  & > a,
+  & > a > img,
+  & > iframe {
+    border-radius: calc(0.75em / 2);
+  }
 }

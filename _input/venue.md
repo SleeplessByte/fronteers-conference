@@ -32,15 +32,17 @@ If you're coming from other parts of the country, a transfer at Rotterdam Centra
 If you need assistance, for example because of a visual impairment or because you use a mobility device, you can utilize the [free travel assistance][ns-travel-assistance] offered by NS.
 Ensure you book your trip at least 60 minutes in advance [via the NS app][ns-travel-assistance]<a href="#train-accessibility"><span class="visually-hidden">note</span><span aria-hidden="true">\*</span></a>, or by [calling][ns-travel-assistance-phone].
 
-<div id="train-accessibility" style="padding: 0.75em 0; border-top: 3px double rgba(255, 255, 255, .52); font-size: smaller; margin: 0.75em 0;"><span class="visually-hidden">note</span><span aria-hidden="true">*</span>: Due to frequent issues with the elevators on the train stations in Dordrecht, it's possible accessible routes show as impossible in the app. Please <a href="tel:+31302357822">call the assistance phone</a> in that case, who can <em>always</em> book your travel despite this message.</div>
+<div id="train-accessibility" class="note-footnote-block"><span class="visually-hidden">note</span><span aria-hidden="true">*</span>: Due to frequent issues with the elevators on the train stations in Dordrecht, it's possible accessible routes show as impossible in the app. Please <a href="tel:+31302357822">call the assistance phone</a> in that case, who can <em>always</em> book your travel despite this message.</div>
 
 ### Arriving by car
 
 Check out the nearby garage [**Drievriendenhof**](https://share.google/F6KEwlW9HPFRPPhOv) — just a few minutes away and open 24/7.
 
-<strong><span aria-hidden="true">⚠️</span>Note:</strong> The [Papendrechtsebrug (Bridge N3)][maps-papendrechtsebrug] will be closed until spring 2027.
-Most up-to-date navigation software will not route you over this bridge.
-The government has provided us with [a document of alternatives (in Dutch only)][rws-papendrechtsebrug].
+<p class="note-block">
+  <strong><span aria-hidden="true">⚠️</span>Note</strong> The <a href="https://maps.app.goo.gl/5oRdNFro84XWLuFs5" target="_blank" rel="noopener noreferrer"><span>Papendrechtsebrug (Bridge N3)</span> <svg role="graphics-symbol" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" class="external-indicator"><title>opens in a new tab</title><path d="M6.22 8.72a.75.75 0 0 0 1.06 1.06l5.22-5.22v1.69a.75.75 0 0 0 1.5 0v-3.5a.75.75 0 0 0-.75-.75h-3.5a.75.75 0 0 0 0 1.5h1.69z"/><path d="M3.5 6.75c0-.69.56-1.25 1.25-1.25H7A.75.75 0 0 0 7 4H4.75A2.75 2.75 0 0 0 2 6.75v4.5A2.75 2.75 0 0 0 4.75 14h4.5A2.75 2.75 0 0 0 12 11.25V9a.75.75 0 0 0-1.5 0v2.25c0 .69-.56 1.25-1.25 1.25h-4.5c-.69 0-1.25-.56-1.25-1.25z"/></svg></a> will be closed until spring 2027.
+  Most up-to-date navigation software will not route you over this bridge.
+  The government has provided us with <a href="https://www.zuidhollandbereikbaar.nl/media/site/ac76bcd051-1775043189/papendrechtsebrug-maatregelen_6_dt.pdf" target="_blank" rel="noopener noreferrer"><span>a document of alternatives (in Dutch only)</span> <svg role="graphics-symbol" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" class="external-indicator"><title>opens in a new tab</title><path d="M6.22 8.72a.75.75 0 0 0 1.06 1.06l5.22-5.22v1.69a.75.75 0 0 0 1.5 0v-3.5a.75.75 0 0 0-.75-.75h-3.5a.75.75 0 0 0 0 1.5h1.69z"/><path d="M3.5 6.75c0-.69.56-1.25 1.25-1.25H7A.75.75 0 0 0 7 4H4.75A2.75 2.75 0 0 0 2 6.75v4.5A2.75 2.75 0 0 0 4.75 14h4.5A2.75 2.75 0 0 0 12 11.25V9a.75.75 0 0 0-1.5 0v2.25c0 .69-.56 1.25-1.25 1.25h-4.5c-.69 0-1.25-.56-1.25-1.25z"/></svg></a>.
+</p>
 
 ### Arriving by bike
 
@@ -48,9 +50,11 @@ Dordrecht has over 650 kilometers of cycle path, of which at least 530 kilometer
 
 Dordrecht is served by various bike sharing programs, [such as the OV-bicycle by NS][ns-ov-fiets] (available [at the train station][ns-ov-fiets-map]) and [Donkey Republic][donkey] in corporation with QBuzz, the bus provider of the region.
 
-<strong><span aria-hidden="true">⚠️</span>Note:</strong> The cycle path on the [Baanhoekbrug][maps-baanhoekbrug] will be closed until spring 2027.
-Most up-to-date navigation software will not route you over this bridge.
-The government has provided us with [a document of alternatives (in Dutch only)][rws-papendrechtsebrug].
+<p class="note-block">
+  <strong><span aria-hidden="true">⚠️</span>Note</strong> The cycle path on the <a href="https://maps.app.goo.gl/BPatMwp4fjXzMrH26" target="_blank" rel="noopener noreferrer"><span>Baanhoekbrug</span> <svg role="graphics-symbol" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" class="external-indicator"><title>opens in a new tab</title><path d="M6.22 8.72a.75.75 0 0 0 1.06 1.06l5.22-5.22v1.69a.75.75 0 0 0 1.5 0v-3.5a.75.75 0 0 0-.75-.75h-3.5a.75.75 0 0 0 0 1.5h1.69z"/><path d="M3.5 6.75c0-.69.56-1.25 1.25-1.25H7A.75.75 0 0 0 7 4H4.75A2.75 2.75 0 0 0 2 6.75v4.5A2.75 2.75 0 0 0 4.75 14h4.5A2.75 2.75 0 0 0 12 11.25V9a.75.75 0 0 0-1.5 0v2.25c0 .69-.56 1.25-1.25 1.25h-4.5c-.69 0-1.25-.56-1.25-1.25z"/></svg></a> will be closed until spring 2027.
+  Most up-to-date navigation software will not route you over this bridge.
+  The government has provided us with <a href="https://www.zuidhollandbereikbaar.nl/media/site/ac76bcd051-1775043189/papendrechtsebrug-maatregelen_6_dt.pdf" target="_blank" rel="noopener noreferrer"><span>a document of alternatives (in Dutch only)</span> <svg role="graphics-symbol" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" class="external-indicator"><title>opens in a new tab</title><path d="M6.22 8.72a.75.75 0 0 0 1.06 1.06l5.22-5.22v1.69a.75.75 0 0 0 1.5 0v-3.5a.75.75 0 0 0-.75-.75h-3.5a.75.75 0 0 0 0 1.5h1.69z"/><path d="M3.5 6.75c0-.69.56-1.25 1.25-1.25H7A.75.75 0 0 0 7 4H4.75A2.75 2.75 0 0 0 2 6.75v4.5A2.75 2.75 0 0 0 4.75 14h4.5A2.75 2.75 0 0 0 12 11.25V9a.75.75 0 0 0-1.5 0v2.25c0 .69-.56 1.25-1.25 1.25h-4.5c-.69 0-1.25-.56-1.25-1.25z"/></svg></a>.
+</p>
 
 <h2 id="accessibility">Accessibility</h2>
 
