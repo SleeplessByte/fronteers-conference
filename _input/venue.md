@@ -30,7 +30,9 @@ The venue is located just [a short walk from Dordrecht Central Station](https://
 If you're coming from other parts of the country, a transfer at Rotterdam Central station usually gets you there quickly and comfortably.
 
 If you need assistance, for example because of a visual impairment or because you use a mobility device, you can utilize the [free travel assistance][ns-travel-assistance] offered by NS.
-Ensure you book your trip at least 60 minutes in advance [via the NS app][ns-travel-assistance], or by [calling][ns-travel-assistance-phone].
+Ensure you book your trip at least 60 minutes in advance [via the NS app][ns-travel-assistance]<a href="#train-accessibility"><span class="visually-hidden">note</span><span aria-hidden="true">\*</span></a>, or by [calling][ns-travel-assistance-phone].
+
+<div id="train-accessibility" style="padding: 0.75em 0; border-top: 3px double rgba(255, 255, 255, .52); font-size: smaller; margin: 0.75em 0;"><span class="visually-hidden">note</span><span aria-hidden="true">*</span>: Due to frequent issues with the elevators on the train stations in Dordrecht, it's possible accessible routes show as impossible in the app. Please <a href="tel:+31302357822">call the assistance phone</a> in that case, who can <em>always</em> book your travel despite this message.</div>
 
 ### Arriving by car
 
