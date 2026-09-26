@@ -36,9 +36,11 @@ That said, should you find the self-guided tour [&ldquo;Rondje Dordt&rdquo;][ron
 <a data-target="non-interactive" href="https://www.komoot.com/tour/3003453179?share_token=a3zsz6Ze5e01wi87Bk5FAhXfZbNMCxYMvUHJSwcGysLQznzhXk" target="_blank" rel="nofollow noopener noreferrer"><img src="/img/fronteers-city-walk-map.png" width="540" height="700" /></a>
 <template data-target="interactive"><iframe src="https://www.komoot.com/tour/3003453179/embed?share_token=a3zsz6Ze5e01wi87Bk5FAhXfZbNMCxYMvUHJSwcGysLQznzhXk&amp;layout=classic&amp;profile=1" width="540" height="700" frameborder="0" scrolling="no" allow="fullscreen" allowfullscreen></iframe></template>
 <template data-target="qr-code"><img src="/img/fronteers-city-walk-qr.png" width="540" height="700" /></template>
+<footer>
 <button type="button" class="button" data-action="interactive" hidden aria-describedby="switching-to-interactive-note">Switch to interactive</button>
 <button type="button" class="button" data-action="qr-code" hidden>Show QR code</button>
 <a href="/static/gpx/fronteers-city-walk.gpx" class="button" download="fronteers-city-walk.gpx">GPX</a>
+</footer>
 </div>
 
 <p id="switching-to-interactive-note"><em>Switching to interactive loads cookies from Komoot.</em></p>
