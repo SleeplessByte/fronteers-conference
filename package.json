@@ -18,5 +18,8 @@
     "dotenv": "^17.4.2",
     "html-prettify": "^1.0.7",
     "node-fetch": "^3.3.2"
+  },
+  "allowScripts": {
+    "sharp@0.33.5": true
   }
 }

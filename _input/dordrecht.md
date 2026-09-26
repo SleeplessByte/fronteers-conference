@@ -49,7 +49,8 @@ That said, should you find the self-guided tour [&ldquo;Rondje Dordt&rdquo;][ron
     const interactiveTemplate = component.querySelector('[data-target="interactive"]');
     const qrCodeTemplate = component.querySelector('[data-target="qr-code"]');
 
-    let element = initial;
+    let activeElement = initial;
+    let mapElement = activeElement;
 
     if (!initial) {
       return
@@ -64,24 +65,36 @@ That said, should you find the self-guided tour [&ldquo;Rondje Dordt&rdquo;][ron
 
           const interactive = document.importNode(interactiveTemplate.content, true).firstElementChild;
 
-          element.replaceWith(interactive);
-          element = interactive;
+          activeElement.replaceWith(interactive);
+          activeElement = interactive;
+          mapElement = interactive;
         }, { once: true });
       }
     }
 
     if (qrCodeTemplate) {
       const action = component.querySelector('[data-action="qr-code"]');
-      const qrCode = document.importNode(interactiveTemplate.content, true).firstElementChild;
+      const qrCode = document.importNode(qrCodeTemplate.content, true).firstElementChild;
 
       if (action) {
         action.removeAttribute('hidden');
+        action.setAttribute('aria-pressed', 'false');
+
         action.addEventListener('click', () => {
+          const pressed = action.getAttribute('aria-pressed') !== 'true';
+          action.setAttribute('aria-pressed', pressed);
 
-          element.replaceWith(qrCode);
-          element = qrCode;
+          if (pressed) {
+            action.textContent = 'Hide QR code';
 
-          action.textContent = 'Show map';
+            activeElement.replaceWith(qrCode);
+            activeElement = qrCode;
+          } else {
+            action.textContent = 'Show QR code';
+
+            activeElement.replaceWith(mapElement);
+            activeElement = mapElement;
+          }
         });
       }
     }

@@ -885,7 +885,8 @@ svg.external-indicator {
 
   & > a,
   & > a > img,
-  & > iframe {
+  & > iframe,
+  & > img {
     border-radius: calc(0.75em / 2);
   }
 }
