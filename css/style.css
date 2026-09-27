@@ -894,9 +894,17 @@ svg.external-indicator {
     object-fit: contain;
   }
 
+  & > iframe {
+    min-height: clamp(500px, 90dvh, 700px);
+  }
+
   & > footer {
+    margin: 0.75em 0;
+
     display: flex;
     flex-wrap: wrap;
     gap: 0.325em;
+
+    justify-content: center;
   }
 }
