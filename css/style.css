@@ -149,7 +149,8 @@ a[href^="mailto:"] {
 
 a:link,
 a:visited,
-a:active {
+a:active,
+button.button {
   text-decoration: underline;
 }
 
@@ -158,11 +159,14 @@ a:visited {
 }
 
 a:focus,
-a:hover {
+a:hover,
+button.button:focus,
+button.button:hover {
   --text-decoration-color: var(--yellow);
 }
 
-a:active {
+a:active,
+button.button:active {
   --text-decoration-color: var(--red);
 }
 
@@ -215,7 +219,7 @@ iframe[title="Codepen"] {
   --text-decoration-color: var(--purple);
 
   width: 30rem;
-  max-width: calc(100vw - 1.5rem);
+  max-width: 100%;
   margin-inline: auto;
   text-decoration-color: var(--text-decoration-color);
 }
@@ -432,63 +436,77 @@ iframe[title="Codepen"] {
   text-align: center;
   line-height: 1.25;
   filter: drop-shadow(0 0 4px #000);
-}
 
-.card.--speaker {
-  overflow: visible;
-  transition: filter 250ms ease;
-
-  & .card__caption {
-    overflow: clip;
-    contain: paint;
-
-    transition: background-color 250ms ease;
+  &.--speaker {
+    overflow: visible;
   }
 
-  & .card__caption:has(a:hover) {
-    background-color: var(--accent-color, transparent);
+  &.--hotel {
+    & img {
+      filter: saturate(1);
+    }
+
+    & .card__text {
+      min-height: 10lh;
+    }
+
+    & .card__caption {
+      text-align: left;
+    }
   }
 
-  & a:focus {
-    outline: none;
+  &.--speaker,
+  &.--hotel {
+    transition: filter 250ms ease;
+
+    & .card__caption {
+      overflow: clip;
+      contain: paint;
+
+      transition: background-color 250ms ease;
+    }
+
+    & .card__caption:has(a:hover) {
+      background-color: var(--accent-color, transparent);
+    }
+
+    & a:focus {
+      outline: none;
+    }
+
+    & picture {
+      pointer-events: none;
+    }
+
+    & picture > img,
+    & picture > source {
+      transition: outline 250ms ease;
+
+      outline: 2px solid transparent;
+      outline-offset: -1px;
+    }
+
+    &:focus-within picture > img,
+    &:focus-within picture > source {
+      outline-color: white;
+    }
+
+    &:active {
+      filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.34));
+    }
   }
 
-  & picture {
-    pointer-events: none;
+  & img {
+    position: relative;
+    z-index: 1;
+    width: 9.375rem;
+    max-width: 80%;
+    height: auto;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    filter: saturate(1);
   }
-
-  & picture > img,
-  & picture > source {
-    transition: outline 250ms ease;
-
-    outline: 2px solid transparent;
-    outline-offset: -1px;
-  }
-
-  &:focus-within picture > img,
-  &:focus-within picture > source {
-    outline-color: white;
-  }
-
-  &:active {
-    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.34));
-  }
-}
-
-.card img {
-  position: relative;
-  z-index: 1;
-  width: 9.375rem;
-  max-width: 80%;
-  height: auto;
-  aspect-ratio: 1/1;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  filter: saturate(1);
-}
-
-.card--hotel img {
-  filter: saturate(1);
 }
 
 .narrow-width .card img {
@@ -506,10 +524,6 @@ iframe[title="Codepen"] {
   font-size: clamp(1em, 3vw, 1rem);
   line-height: 1.2;
   text-align: center;
-}
-
-.card--hotel .card__caption {
-  text-align: left;
 }
 
 .narrow-width .card__caption {
@@ -630,11 +644,7 @@ iframe[title="Codepen"] {
 }
 
 .card__text {
-  min-height: 3lh;
-}
-
-.card--hotel .card__text {
-  min-height: 10lh;
+  min-height: 4lh;
 }
 
 .narrow-width .cards__item {
@@ -642,7 +652,8 @@ iframe[title="Codepen"] {
 }
 
 .button {
-  display: inline-block;
+  appearance: none;
+  border: 0;
   min-width: 150px;
   padding: 0.25rem 1.25rem;
   background-color: #000;
@@ -651,6 +662,10 @@ iframe[title="Codepen"] {
   text-decoration: none;
   cursor: pointer;
   clip-path: url(#button-parentheses);
+
+  &:not([hidden]) {
+    display: inline-block;
+  }
 }
 
 .button:focus,
@@ -836,4 +851,60 @@ td br::before {
   bottom: 0;
   object-position: bottom;
   object-fit: cover;
+}
+
+.note-block {
+  padding: 0.75em;
+  margin-top: 0.75em;
+  font-size: smaller;
+  background: rgba(0, 0, 0, 0.54);
+  border-radius: calc(0.75em / 2);
+
+  & > strong:first-child {
+    display: block;
+    margin-bottom: calc(0.75em / 2);
+  }
+}
+
+.note-footnote-block {
+  padding: 0.75em 0;
+  border-top: 3px double rgba(255, 255, 255, 0.52);
+  font-size: smaller;
+  margin: 0.75em 0;
+}
+
+svg.external-indicator {
+  width: 18px;
+  height: 18px;
+  margin: -4px 0;
+  color: var(--text-decoration-color, yellow);
+}
+
+[data-component="komoot-card"] {
+  margin: 0.75em 0;
+
+  & > a > img,
+  & > iframe,
+  & > img {
+    border-radius: calc(0.75em / 2);
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 540 / 700;
+    object-fit: contain;
+  }
+
+  & > iframe {
+    min-height: clamp(500px, 90dvh, 700px);
+  }
+
+  & > footer {
+    margin: 0.75em 0;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.325em;
+
+    justify-content: center;
+  }
 }
