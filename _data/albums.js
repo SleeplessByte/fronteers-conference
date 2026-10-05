@@ -38,14 +38,13 @@ export default async function () {
           (item) => item.Key.endsWith(".jpg") || item.Key.endsWith(".jpeg")
         ).map((item) => ({
           key: item.Key,
-          url: `${process.env.S3_URL}/${item.Key}`,
+          url: `${process.env.S3_URL}/${params.Bucket}/${item.Key}`,
         }));
 
         // Find matching metadata
-        const metadata =
-          albumMetadata.albums.find(
-            (meta) => meta.folderName === album.folderName
-          ) || {};
+        const metadata = albumMetadata.albums.find(
+          (meta) => meta.folderName === album.folderName
+        ) || { __remove: true };
 
         return {
           ...album,
@@ -55,7 +54,9 @@ export default async function () {
       })
     );
 
-    return albums.sort((a, b) => b.date.localeCompare(a.date));
+    return albums
+      .filter((album) => !album.__remove)
+      .sort((a, b) => b.date.localeCompare(a.date));
   } catch (error) {
     console.error("Error fetching albums from storage:", error);
     return [];

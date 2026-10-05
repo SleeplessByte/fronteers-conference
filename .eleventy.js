@@ -10,6 +10,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addWatchTarget("./_includes/");
   eleventyConfig.addWatchTarget("./_partials/");
   eleventyConfig.addWatchTarget("./css/");
+  eleventyConfig.addWatchTarget("./scripts/");
 
   eleventyConfig.addPassthroughCopy({
     "./static/": "./static/",
@@ -18,111 +19,109 @@ export default function (eleventyConfig) {
     "./css/": "./css/",
     "./img/": "./img/",
     "./fonts/": "./fonts/",
+    "./scripts/": "./scripts/",
   });
 
-  // Image plugin
-  eleventyConfig.addNunjucksAsyncShortcode(
-    "image",
-    async function (src, alt = "", sizes = "100vw", loading = "eager") {
-      let metadata;
+  async function makeOptimizedImage(
+    src,
+    alt = "",
+    sizes = "100vw",
+    loading = "eager",
+    widths = [100, 200, 300, 400, 500, 600, 800, 1000, 1200, 1600, 2000, 3000],
+    formats = ["avif", "jpeg"],
+    classes = ["--generated"]
+  ) {
+    let metadata;
 
-      try {
-        metadata = await Image(`.${src}`, {
-          widths: [
-            100, 200, 300, 400, 500, 600, 800, 1000, 1200, 1600, 2000, 3000,
-          ],
-          formats: ["avif", "jpeg"],
-          outputDir: "./img/generated/",
-          urlPath: "/img/generated/",
-        });
-      } catch (err) {
-        console.error(err.message);
-        return "";
-      }
-
-      let imageAttributes = {
-        alt,
-        sizes,
-        loading,
-        decoding: loading === "eager" ? "sync" : "async",
-        fetchpriority: loading === "eager" ? "high" : "auto",
-      };
-
-      let html = "";
-
-      try {
-        html = Image.generateHTML(metadata, imageAttributes);
-      } catch (err) {
-        console.error(err.message);
-      }
-
-      return `${html}`;
-    }
-  );
-
-  eleventyConfig.addShortcode(
-    "thumbnail",
-    async function (src, alt = "", widths = [340, 600]) {
-      let metadata;
-
-      try {
-        metadata = await Image(src, {
-          widths,
-          formats: ["jpeg"],
-          outputDir: "_site/thumbnails/",
-          urlPath: "/thumbnails/",
-        });
-      } catch (err) {
-        console.error(err.message);
-        return "";
-      }
-
-      let data = metadata.jpeg[metadata.jpeg.length - 1];
-
-      return `<img
-        src="${data.url}"
-        width="${data.width}"
-        height="${data.height}"
-        alt="${alt}"
-        class="image-${data.width > data.height ? "landscape" : "portrait"}"
-        data-src="${src}"
-        loading="lazy"
-        decoding="async"
-      >`;
-    }
-  );
-
-  eleventyConfig.addShortcode("photoGrid", async function (photos, alt) {
-    if (alt === undefined) {
-      // You bet we throw an error on missing alt (alt="" works okay)
-      throw new Error(`Missing \`alt\` on image from: ${src}`);
+    if (!src.startsWith("https://") && !src.startsWith("http://")) {
+      src = `./${src}`;
+    } else {
+      console.debug(`[img] optimize remote: ${src}`);
     }
 
-    let html = "<ul data-target='photo-grid' class='photo-grid'>";
+    if (src.startsWith(".//")) {
+      src = src.replace(".//", "./");
+    }
 
-    for (let photo of photos) {
-      let metadata = await Image(photo.url, {
-        widths: [340, 600],
-        formats: ["jpeg"],
-        outputDir: "_site/thumbnails/",
-        urlPath: "/thumbnails/",
+    try {
+      metadata = await Image(src, {
+        widths,
+        formats,
+        outputDir: "./img/generated/",
+        urlPath: "/img/generated/",
       });
+    } catch (err) {
+      console.error(err.message);
+      return "";
+    }
 
-      let data = metadata.jpeg[metadata.jpeg.length - 1];
+    const allData = metadata[formats[0]];
+    const data = allData[allData.length - 1];
 
-      html += `
-      <li class="thumbnail thumbnail-${data.width > data.height ? "landscape" : "portrait"}">
-        <a href="${photo.url}">
-          <img
-            src="${data.url}"
-            width="${data.width}"
-            height="${data.height}"
-            alt="${alt}"
-            loading="lazy"
-            decoding="async"
-          >
-        </a>
-      </li>`;
+    const orientation =
+      data.width > data.height
+        ? "landscape"
+        : Math.abs(data.width - data.height) < 5
+          ? "square"
+          : "portrait";
+
+    const imageAttributes = {
+      alt,
+      sizes,
+      loading,
+      decoding: loading === "eager" ? "sync" : "async",
+      fetchpriority: loading === "eager" ? "high" : "auto",
+      class: classes.concat([`--${orientation}`]).join(" "),
+    };
+
+    let html = "";
+
+    try {
+      html = Image.generateHTML(metadata, imageAttributes);
+    } catch (err) {
+      console.error(err.message);
+    }
+
+    return `${html}`;
+  }
+
+  async function makeThumbnail(
+    src,
+    alt = "",
+    sizes = "100vw",
+    loading = "lazy",
+    widths = [600],
+    formats = ["avif", "jpeg"]
+  ) {
+    return makeOptimizedImage(src, alt, sizes, loading, widths, formats);
+  }
+
+  // Image plugin
+  eleventyConfig.addNunjucksAsyncShortcode("image", makeOptimizedImage);
+
+  eleventyConfig.addShortcode("thumbnail", makeThumbnail);
+  eleventyConfig.addShortcode("photoGrid", async function (photos) {
+    let html = "<ul data-component='photo-grid' class='photo-grid'>";
+
+    for (let i = 0; i < photos.length; i++) {
+      const photo = photos[i];
+      const imageHtml = await makeOptimizedImage(
+        photo.url,
+        "",
+        "33vw",
+        i > 9 ? "lazy" : "eager",
+        [357 * 2]
+      );
+
+      const orientation = imageHtml.includes("--landscape")
+        ? "--landscape"
+        : imageHtml.includes("--portrait")
+          ? "--portrait"
+          : imageHtml.includes("--square")
+            ? "--square"
+            : "";
+
+      html += `<li class="photo ${orientation}"><a href="${photo.url}">${imageHtml}</a></li>`;
     }
 
     html += "</ul>";
