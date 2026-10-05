@@ -47,7 +47,7 @@ export default function (eleventyConfig) {
       metadata = await Image(src, {
         widths,
         formats,
-        outputDir: "./img/generated/",
+        outputDir: "./_site/img/generated/",
         urlPath: "/img/generated/",
       });
     } catch (err) {
