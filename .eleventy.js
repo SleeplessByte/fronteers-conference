@@ -25,6 +25,7 @@ export default function (eleventyConfig) {
     "image",
     async function (src, alt = "", sizes = "100vw", loading = "eager") {
       let metadata;
+
       try {
         metadata = await Image(`.${src}`, {
           widths: [
@@ -58,6 +59,76 @@ export default function (eleventyConfig) {
       return `${html}`;
     }
   );
+
+  eleventyConfig.addShortcode(
+    "thumbnail",
+    async function (src, alt = "", widths = [340, 600]) {
+      let metadata;
+
+      try {
+        metadata = await Image(src, {
+          widths,
+          formats: ["jpeg"],
+          outputDir: "_site/thumbnails/",
+          urlPath: "/thumbnails/",
+        });
+      } catch (err) {
+        console.error(err.message);
+        return "";
+      }
+
+      let data = metadata.jpeg[metadata.jpeg.length - 1];
+
+      return `<img
+        src="${data.url}"
+        width="${data.width}"
+        height="${data.height}"
+        alt="${alt}"
+        class="image-${data.width > data.height ? "landscape" : "portrait"}"
+        data-src="${src}"
+        loading="lazy"
+        decoding="async"
+      >`;
+    }
+  );
+
+  eleventyConfig.addShortcode("photoGrid", async function (photos, alt) {
+    if (alt === undefined) {
+      // You bet we throw an error on missing alt (alt="" works okay)
+      throw new Error(`Missing \`alt\` on image from: ${src}`);
+    }
+
+    let html = "<ul data-target='photo-grid' class='photo-grid'>";
+
+    for (let photo of photos) {
+      let metadata = await Image(photo.url, {
+        widths: [340, 600],
+        formats: ["jpeg"],
+        outputDir: "_site/thumbnails/",
+        urlPath: "/thumbnails/",
+      });
+
+      let data = metadata.jpeg[metadata.jpeg.length - 1];
+
+      html += `
+      <li class="thumbnail thumbnail-${data.width > data.height ? "landscape" : "portrait"}">
+        <a href="${photo.url}">
+          <img
+            src="${data.url}"
+            width="${data.width}"
+            height="${data.height}"
+            alt="${alt}"
+            loading="lazy"
+            decoding="async"
+          >
+        </a>
+      </li>`;
+    }
+
+    html += "</ul>";
+
+    return html;
+  });
 
   eleventyConfig.addShortcode("version", function () {
     return now;

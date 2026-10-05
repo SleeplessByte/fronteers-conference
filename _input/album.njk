@@ -1,0 +1,157 @@
+---
+layout: page.njk
+pagination:
+  data: albums
+  size: 1
+  alias: album
+permalink: "albums/{{ album.folderName | slug }}/index.html"
+title: Impressions
+description:
+---
+
+<header class="album-header">
+  <h2 class="headline">{{ album.displayName or album.folderName or title }}</h2>
+</header>
+
+<div class="album-meta">
+  {% if album.date %}
+    <p class="album-date">{{ album.date }}</p>
+  {% endif %}
+  {% if album.description %}
+    <p class="album-description">{{ album.description }}</p>
+  {% endif %}
+</div>
+
+{% photoGrid album.images, album.folderName %}
+
+<div id="lightbox" data-target="lightbox" class="lightbox" role="dialog" hidden>
+  <div class="lightbox-content" role="document">
+    <nav class="lightbox-nav" aria-label="Lightbox navigation">
+      <button class="lightbox-prev" data-action="prev" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" role="graphics-symbol">
+          <title>Previous photo</title>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+      </button>
+      <button class="lightbox-next" data-action="next" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" role="graphics-symbol">
+          <title>Next photo</title>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+        </svg>
+      </button>
+      <button class="lightbox-close" data-action="close" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" role="graphics-symbol">
+          <title>Close lightbox</title>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </nav>
+    <img data-target="image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const photoGrid = document.querySelector('[data-target="photo-grid"]');
+
+    const lightbox = document.querySelector('[data-target="lightbox"]');
+    const lightboxContent = lightbox.querySelector('[role="document"]');
+    const lightboxImage = lightboxContent.querySelector('img[data-target="image"]');
+    const actions = lightboxContent.querySelectorAll('button[data-action]')
+
+    if (!lightbox) {
+      throw new Error("Expected [data-target='lightbox'] to exist on page");
+    }
+
+    if (!lightboxContent) {
+      throw new Error('Expected [role="document"] to exist inside lightbox');
+    }
+
+    if (!lightboxImage) {
+      throw new Error('Expected img[data-target="image"] to exist inside lightbox content');
+    }
+
+    photoGrid.addEventListener('click', function(event) {
+      if (!event.target || !(event instanceof Element)) {
+        return
+      }
+
+      const image = event.closest('a') || event.closest('img');
+      if (!image) {
+        return;
+      }
+
+      const imageSrc = image.href || image.dataset.src || image.src;
+      lightboxImage.src = imageSrc;
+
+      lightbox.removeAttribute('hidden');
+      // TODO: popup/modal
+    });
+
+    function closeLightbox() {
+      lightbox.setAttribute('hidden', '');
+      lightboxImage.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+    }
+
+    function gotoNext() {
+      // TODO:
+    }
+
+    function gotoPrev() {
+      // TODO:
+    }
+
+    function onAction(event) {
+      if (!event.target || !(event instanceof Element)) {
+        return
+      }
+
+      const action = event.closest('[data-action]');
+
+      switch (action.getAttribute('data-action')) {
+        case 'next': {
+          gotoNext();
+          break;
+        }
+
+        case 'prev': {
+          gotoPrev();
+          break;
+        }
+
+        case 'close': {
+          closeLightbox();
+          break;
+        }
+      }
+    }
+
+    actions.forEach((action) => {
+      action.addEventListener('click', onAction);
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(event) {
+      if (lightbox.hasAttribute('hidden')) {
+        return
+      }
+
+      switch (event.key) {
+        case 'Escape': {
+          closeLightbox();
+          break;
+        }
+
+        case 'ArrowLeft': {
+          gotoPrev();
+          break;
+        }
+
+        case 'ArrowRight': {
+          gotoNext();
+          break;
+        }
+      }
+    });
+  });
+</script>
