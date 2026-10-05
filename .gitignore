@@ -8,3 +8,4 @@ _tmp/
 node_modules/
 .env
 /.cache
+/img/generated
